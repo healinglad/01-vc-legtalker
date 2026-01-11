@@ -1,6 +1,6 @@
 {
-  "name": "LegWalker",
-  "short_name": "LegWalker",
+  "name": "LegTalker",
+  "short_name": "LegTalker",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0f172a",
@@ -13,9 +13,9 @@
       "type": "image/svg+xml"
     },
     {
-        "src": "/vite.svg",
-        "sizes": "512x512",
-        "type": "image/svg+xml"
+      "src": "/vite.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
     }
   ]
 }

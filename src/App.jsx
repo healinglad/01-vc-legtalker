@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import LogExercise from './components/LogExercise';
 import Dashboard from './components/Dashboard';
+import CalendarView from './components/CalendarView';
 import { getStats } from './utils/storage';
 import './App.css';
 
 function App() {
+  const [viewType, setViewType] = useState('exercise');
+  const [editingLog, setEditingLog] = useState(null);
   const [stats, setStats] = useState({
     last7Days: 0,
     last30Days: 0,
@@ -14,8 +17,8 @@ function App() {
   const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
-    setStats(getStats());
-  }, [refreshKey]);
+    setStats(getStats(viewType));
+  }, [refreshKey, viewType]);
 
   const handleLogAdded = () => {
     setRefreshKey(prev => prev + 1);
@@ -25,7 +28,7 @@ function App() {
     <div className="app-container" style={{ padding: '20px', paddingBottom: '40px' }}>
       <header style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h1 style={{ background: 'linear-gradient(to right, #fff, #94a3b8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          LegWalker
+          LegTalker
         </h1>
         <div style={{ width: '32px', height: '32px', background: 'var(--accent)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <span style={{ color: '#0f172a', fontWeight: 'bold' }}>L</span>
@@ -33,11 +36,23 @@ function App() {
       </header>
 
       <main>
-        <Dashboard stats={stats} />
+        <Dashboard stats={stats} viewType={viewType} setViewType={setViewType} onDataChange={handleLogAdded} />
+
+        <div style={{ marginTop: '1rem' }}>
+          <CalendarView
+            viewType={viewType}
+            setEditingLog={setEditingLog}
+            onLogChange={handleLogAdded}
+          />
+        </div>
 
         <div style={{ height: '2px', background: 'rgba(255,255,255,0.05)', margin: '2rem 0' }}></div>
 
-        <LogExercise onLogAdded={handleLogAdded} />
+        <LogExercise
+          onLogAdded={handleLogAdded}
+          editingLog={editingLog}
+          setEditingLog={setEditingLog}
+        />
 
         <div style={{ marginTop: '3rem', textAlign: 'center' }}>
           <p className="text-muted" style={{ fontSize: '0.8rem' }}>Logs stored locally on your device.</p>

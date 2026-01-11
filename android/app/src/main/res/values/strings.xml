@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">LegWalker</string>
-    <string name="title_activity_main">LegWalker</string>
+    <string name="app_name">LegTalker</string>
+    <string name="title_activity_main">LegTalker</string>
     <string name="package_name">com.legwalker.app</string>
     <string name="custom_url_scheme">com.legwalker.app</string>
 </resources>
